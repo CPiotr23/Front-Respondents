@@ -1,34 +1,29 @@
 import RespondentFinder from '../objects/RespondentFinder'
-import axios from "axios";
 import React, {useEffect, useState} from "react";
-import FindRespondent from "./fetches/FindRespondent"
-
+import FindRespondent from './fetches/FindRespondent'
+import RespondentEditer from '../objects/RespondentEditer'
 export default function UpdateRespondent(props) {
 
-    
-    const [id, setId] = useState(null)
-    const [respondent, setRespondent] = useState(null)
+    const [id, setId] = useState(null);
+    const [respondent, setRespondent] = useState(null);
 
-    function buttonHandler(value) {
-        if(value!=='') {
-            setId(value)
-        }
-        else setRespondent('')
+    function submitIdValueHandler(value) {
+        setId(value);
     }
 
     useEffect(() => {
-        if(id!==null && id!==''){ 
-            axios.get("http://localhost:8080/respondents/findById/"+id)
-            .then((response) => {
-                setRespondent(response.data)
-            })
+        console.log(id)
+        if(id!==null && id!=='') {
+         FindRespondent({id, setRespondent})  
         }
-    }, [id])
+        else setRespondent(null)
+    },[id])
+
 
     return (
         <div className="mainBody">
-            <RespondentFinder/>
-            <FindRespondent currentPage={props.currentPage} respondent={respondent} id={id} buttonHandler={buttonHandler}/>
+            <RespondentFinder submitIdValueHandler={submitIdValueHandler}/>
+            {respondent!==null && id!=='' ? <RespondentEditer respondent={respondent}/> : 'Respondent with given ID weren\'t found'}
         </div>
-      );
+    );
 }
