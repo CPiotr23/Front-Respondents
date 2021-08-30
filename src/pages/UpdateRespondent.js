@@ -34,7 +34,7 @@ export default function UpdateRespondent({currentPage}) {
                 {respondent!==null ? 
                 (editable===false ? 
                 <RespondentSingle currentPage={currentPage} respondent={respondent} editable={editable} setEditable={setEditable}/> 
-                :<RespondentEditer respondent={respondent} editable={editable} setEditable={setEditable}/>) 
+                :<RespondentEditer respondent={respondent} editable={editable} setEditable={setEditable} setRespondent={setRespondent}/>) 
                 :null}
             </div>
         );

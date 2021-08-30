@@ -8,7 +8,7 @@ export default function RespondentSingle ({currentPage, respondent, setEditable,
     return (
         <div className="respondent">
             <div className="respondentkeys">
-                    {Object.keys(respondent).map(key => <><b>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></>)}
+                    {Object.keys(respondent).map(key => <><b key={key}>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></>)}
                 </div>
                 <div className="respondentvalues">
                     {Object.values(respondent).map(value => <>{value}<br/></>)}

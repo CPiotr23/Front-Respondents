@@ -1,21 +1,30 @@
 
-import UpdatingRespondent from '../pages/fetches/UpdatingRespondent'
+import UpdatingRespondent from '../pages/fetches/UpdatingRespondent';
+import {useState} from 'react';
 
-export default function RespondentEditer({respondent, setEditable, editable}) {
+export default function RespondentEditer({respondent, setEditable, editable, setRespondent}) {
+
+    const [inputs, setInputs] = useState(respondent);
 
     function onClickHandler() {
-        UpdatingRespondent(respondent);
+        UpdatingRespondent(inputs);
+        setRespondent(inputs);
         setEditable(!editable);
+    }
+
+    function inputsChangeHandler(e) {
+        e.preventDefault()
+        setInputs({...inputs, [e.target.name]: e.target.value})
     }
 
     return (
         <div className="respondent"> 
                 <div className="respondentkeys">
-                    {Object.keys(respondent).map(key => <><b key={key}>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></>)}
+                    {Object.keys(inputs).map(key => <><b key={key}>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></>)}
                 </div>
                 <div className="respondentvalues">
-                    {Object.entries(respondent).map(obj => 
-                    <>{obj[0] !=='id' ? <input type={typeof obj[1]}/> : obj[1]}<br/></>)}
+                    {Object.entries(inputs).map(obj => 
+                    <>{obj[0] !=='id' ? <input name={obj[0]} type={typeof obj[1]} value={obj[1]} onChange={(e) => inputsChangeHandler(e)}/> : obj[1]}<br/></>)}
                 </div>
                 <div className="respondentpanel">
                     <button className="btn_edit" onClick={() => setEditable(!editable)}/><br/>
