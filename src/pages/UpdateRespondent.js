@@ -1,29 +1,41 @@
 import RespondentFinder from '../objects/RespondentFinder'
 import React, {useEffect, useState} from "react";
 import FindRespondent from './fetches/FindRespondent'
+import RespondentSingle from '../objects/RespondentSingle'
 import RespondentEditer from '../objects/RespondentEditer'
-export default function UpdateRespondent(props) {
+
+export default function UpdateRespondent({currentPage}) {
 
     const [id, setId] = useState(null);
     const [respondent, setRespondent] = useState(null);
+    const [editable, setEditable] = useState(false);
 
     function submitIdValueHandler(value) {
-        setId(value);
+        if(value!=='') {
+            setId(value);
+        }
+        else {
+            setId('');
+        }
+        setEditable(false);
     }
 
     useEffect(() => {
-        console.log(id)
         if(id!==null && id!=='') {
-         FindRespondent({id, setRespondent})  
+         FindRespondent({id, setRespondent}) 
         }
         else setRespondent(null)
     },[id])
-
-
-    return (
-        <div className="mainBody">
-            <RespondentFinder submitIdValueHandler={submitIdValueHandler}/>
-            {respondent!==null && id!=='' ? <RespondentEditer respondent={respondent}/> : 'Respondent with given ID weren\'t found'}
-        </div>
-    );
+        return (
+            <div className="mainBody">
+                <RespondentFinder submitIdValueHandler={submitIdValueHandler}/>
+                {id==='' ? 'Insert id value!' : null}
+                {id!==null && id!=='' && respondent===null ? 'Respondent with given id werent found!' : null}
+                {respondent!==null ? 
+                (editable===false ? 
+                <RespondentSingle currentPage={currentPage} respondent={respondent} editable={editable} setEditable={setEditable}/> 
+                :<RespondentEditer respondent={respondent} editable={editable} setEditable={setEditable}/>) 
+                :null}
+            </div>
+        );
 }

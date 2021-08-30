@@ -13,7 +13,7 @@ function Page(props) {
     }
     if(props.currentPage==='listofrespondents'){
         return(
-            <RespondentsPage baseURL={baseURL}/>
+            <RespondentsPage currentPage={props.currentPage} baseURL={baseURL}/>
         );
     }
     if(props.currentPage==='addrespondent'){
@@ -23,7 +23,7 @@ function Page(props) {
     }
     if(props.currentPage==='updaterespondent'){
         return (
-            <UpdateRespondent baseURL={baseURL} />
+            <UpdateRespondent currentPage={props.currentPage} baseURL={baseURL} />
         );
     }
 }

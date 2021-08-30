@@ -5,7 +5,6 @@ export default function RespondentFinder({submitIdValueHandler}) {
 
    function changeHandler(value) {
        setValue(value)
-       console.log(value)
    }
 
     return (

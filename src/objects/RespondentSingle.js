@@ -1,38 +1,22 @@
-import React, {useState} from 'react'
-import axios from 'axios'
-import RespondentEditer from './RespondentEditer'
+import React from 'react'
+import DeleteRespondent from '../pages/fetches/DeleteRespondent';
 
-export default function RespondentSingle (props) {
-    
-    const [editable, setEditable] = useState(false)
-
-    function deleteHandler(e) {
-        e.preventDefault()
-        axios
-            .delete("http://localhost:8080/respondents/delete/"+props.respondent.id)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+export default function RespondentSingle ({currentPage, respondent, setEditable, editable}) {   
+    function deleteHandler() {
+        DeleteRespondent(respondent.id);
     }
-    if(editable===false) {
     return (
-        <div className="respondent"> 
-            {console.log(editable)}
-            Id: {props.respondent.id}<button className="btn_delete" onClick={(e) => deleteHandler(e)}/>{props.currentPage==='updaterespondent' ? <button className="btn_edit" onClick={() => setEditable(!editable)}/> : ''}<br/>
-            Gender: {props.respondent.gender}<br />
-            Age: {props.respondent.age}<br/>
-            Income: {props.respondent.income}<br/> 
-            Kids: {props.respondent.kids}<br/>
-            ownHome: {props.respondent.ownHome}<br/>
-            subscribe: {props.respondent.subscribe}<br/> 
-            segment: {props.respondent.segment}<br/>
+        <div className="respondent">
+            <div className="respondentkeys">
+                    {Object.keys(respondent).map(key => <><b>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></>)}
+                </div>
+                <div className="respondentvalues">
+                    {Object.values(respondent).map(value => <>{value}<br/></>)}
+                </div>
+                <div className="respondentpanel">
+                    <button className="btn_delete" onClick={() => deleteHandler(respondent.id)}/><br/>
+                    {currentPage==='updaterespondent' ? <button className="btn_edit" onClick={() => setEditable(!editable)}/> : null}
+                </div> 
         </div>
-    );
-    }
-    else return (
-        <RespondentEditer respondent={props.respondent}/>
     );
 }

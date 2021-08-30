@@ -3,7 +3,7 @@ import RespondentSingle from '../objects/RespondentSingle'
 import axios from 'axios'
 
 
-export default function RespondentsPage() {
+export default function RespondentsPage({currentPage}) {
     const [error, setError] = useState(null);
     const [respondents, setRespondents] = useState([]);
 
@@ -28,7 +28,7 @@ export default function RespondentsPage() {
         return (
             <div className="mainBody">
                 {respondents.map(respondent => (
-                    <RespondentSingle respondent={respondent} key={respondent.id}/>
+                    <RespondentSingle currentPage={currentPage} respondent={respondent} key={respondent.id}/>
                 ))}
             </div>
         );

@@ -5,7 +5,12 @@ export default function FindRespondent(props) {
         axios
         .get('http://localhost:8080/respondents/findById/'+props.id)
         .then(response => {
-          props.setRespondent(response.data)
+            if(response.data!=='') {
+                props.setRespondent(response.data)
+            }
+            else {
+                props.setRespondent(null)
+            }
         })
         .catch(error => {
         console.log(error)
