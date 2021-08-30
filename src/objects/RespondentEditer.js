@@ -1,6 +1,6 @@
 
 import UpdatingRespondent from '../pages/fetches/UpdatingRespondent';
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 export default function RespondentEditer({respondent, setEditable, editable, setRespondent}) {
 
@@ -20,11 +20,11 @@ export default function RespondentEditer({respondent, setEditable, editable, set
     return (
         <div className="respondent"> 
                 <div className="respondentkeys">
-                    {Object.keys(inputs).map(key => <><b key={key}>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></>)}
+                    {Object.keys(inputs).map(key => <React.Fragment key={key}><b key={key}>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></React.Fragment>)}
                 </div>
                 <div className="respondentvalues">
                     {Object.entries(inputs).map(obj => 
-                    <>{obj[0] !=='id' ? <input name={obj[0]} type={typeof obj[1]} value={obj[1]} onChange={(e) => inputsChangeHandler(e)}/> : obj[1]}<br/></>)}
+                    <React.Fragment key={obj[0]}>{obj[0] !=='id' ? <input name={obj[0]} type={typeof obj[1]} value={obj[1]} onChange={(e) => inputsChangeHandler(e)}/> : obj[1]}<br/></React.Fragment>)}
                 </div>
                 <div className="respondentpanel">
                     <button className="btn_edit" onClick={() => setEditable(!editable)}/><br/>
