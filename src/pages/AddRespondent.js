@@ -1,38 +1,25 @@
 
-import axios from 'axios';
 import React, { useState } from 'react';
-import RespondentAdder from '../objects/RespondentAdder'
+import RespondentAdder from '../objects/RespondentAdder';
+import AddingRespondent from './fetches/AddingRespondent';
+import RespondentSingle from '../objects/RespondentSingle';
 
 export default function AddRespondent () {
+        
+        const [values, setValues] = useState({name: '', age: ''})
 
-    const [respondent, setNewRespondent] = useState(
-        {
-            gender: 'Male',
-            age: '18',
-            income: '0',
-            kids: '0',
-            ownHome: 'ownNo',
-            subscribe: 'subNo',
-            segment: 'Suburb mix',
+        function inputsHandler(e) {
+            setValues({...values, [e.target.name]: e.target.value});
+            console.log(values);
         }
-    );
 
-    function submitHandler(e) {
-        e.preventDefault()
-        axios
-            .post("http://localhost:8080/respondents/add", respondent) 
-            .then(res => {
-                console.log(res)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-    function changeHandler(e) {
-        setNewRespondent({...respondent, [e.target.id]: e.target.value})
-    }
+        function submitHandler({values}) {
+            console.log(values);
+        }
 
-    return (
-        <RespondentAdder respondent={respondent} submitHandler={(e) => submitHandler(e)} changeHandler={(e) => changeHandler(e)}/>
-    );
+        return (
+            <>
+                <RespondentAdder submitHandler={submitHandler} inputsHandler={inputsHandler} values={values} />
+            </>
+        );
 }
