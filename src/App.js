@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import Page from './objects/Page';
 import Panel from './objects/Panel';
-
+import MainPage from './pages/MainPage';
+import RespondentsPage from './pages/RespondentsPage';
+import UpdateRespondent from './pages/UpdateRespondent';
+import AddRespondent from './pages/AddRespondent';
+import {Route, BrowserRouter  as Router} from 'react-router-dom';
 
 export default function App () {
 
     const [page, setPage] = useState('main')
+
     return (
-        <div className="page">
-        <Panel changeCurrentPage={page => setPage(page)}/> 
-        <Page currentPage={page}/>
-        </div>
+        <Router>
+            <div className="page">
+            <Panel changeCurrentPage={page => setPage(page)}/>
+            {page==='main' ? <Route path="/" component={MainPage} /> : null}
+            {page==='respondents' ? <Route path="/respondents" component={RespondentsPage} /> : null}
+            {page==='update' ? <Route path="/update" component={UpdateRespondent} /> : null}
+            {page==='add' ? <Route path="/add" component={AddRespondent} /> : null}
+            </div>
+        </Router>
     );
 }
