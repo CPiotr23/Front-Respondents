@@ -1,7 +1,7 @@
 import React from 'react'
 import DeleteRespondent from '../pages/fetches/DeleteRespondent';
 
-export default function RespondentSingle ({currentPage, respondent, setEditable, editable}) {   
+export default function RespondentSingle ({currentPage, respondent, setEditable, editable, confirmHandler, setNewRespondent, setAddedRespondent}) {   
     function deleteHandler() {
         DeleteRespondent(respondent.id);
     }
@@ -16,6 +16,7 @@ export default function RespondentSingle ({currentPage, respondent, setEditable,
                 <div className="respondentpanel">
                     <button className="btn_delete" onClick={() => deleteHandler(respondent.id)}/><br/>
                     {currentPage==='updaterespondent' ? <button className="btn_edit" onClick={() => setEditable(!editable)}/> : null}
+                    {currentPage==='addrespondent' ? <button className="btn_confirm" onClick={() => confirmHandler({setNewRespondent, setAddedRespondent})} /> : null}
                 </div> 
         </div>
     );

@@ -18,7 +18,7 @@ function Page(props) {
     }
     if(props.currentPage==='addrespondent'){
         return(
-            <AddRespondent baseURL={baseURL}/>
+            <AddRespondent currentPage={props.currentPage} baseURL={baseURL}/>
         );
     }
     if(props.currentPage==='updaterespondent'){

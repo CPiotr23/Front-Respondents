@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import RespondentSingle from '../objects/RespondentSingle'
-import axios from 'axios'
+import FindAllRespondents from './fetches/FindAllRespondents';
 
 
 export default function RespondentsPage({currentPage}) {
@@ -8,13 +8,7 @@ export default function RespondentsPage({currentPage}) {
     const [respondents, setRespondents] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/respondents/findAll")
-        .then((response) => {
-        setRespondents(response.data);
-        })
-        .catch(function(error) {
-            setError(error);
-        });
+        FindAllRespondents({setRespondents, setError});
     }, []);
    
     if(error){
