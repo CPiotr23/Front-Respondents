@@ -1,10 +1,15 @@
 import React from 'react'
 import DeleteRespondent from '../pages/fetches/DeleteRespondent';
 
+import { useSelector } from 'react-redux';
+
 export default function RespondentSingle ({currentPage, respondent, setEditable, editable, confirmHandler, setNewRespondent, setAddedRespondent}) {   
     function deleteHandler() {
         DeleteRespondent(respondent.id);
     }
+
+    const page = useSelector((state) => state.page);
+    
     return (
         <div className="respondent">
             <div className="respondentkeys">
