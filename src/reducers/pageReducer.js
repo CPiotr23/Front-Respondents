@@ -4,8 +4,12 @@ const reducer = (state = 'main', action) => {
             return state='main';
         case 'respondents':
             return state='respondents';
+        case 'update':
+            return state='update';
+        case  'add':
+            return state='add';
         default:
-            return state='main';
+            return state;
     }
 };
 
