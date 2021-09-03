@@ -13,6 +13,7 @@ export default function App () {
     return (
         <Router>
             <div className="page">
+            {console.log(page)}
             <Panel changeCurrentPage={page => setPage(page)}/>
             {page==='main' ? <Route path="/" component={MainPage} /> : null}
             {page==='respondents' ? <Route path="/respondents" component={RespondentsPage} /> : null}

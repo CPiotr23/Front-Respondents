@@ -22,7 +22,7 @@ export default function RespondentsPage({currentPage}) {
         return (
             <div className="mainBody">
                 {respondents.map(respondent => (
-                    <RespondentSingle currentPage={currentPage} respondent={respondent} key={respondent.id}/>
+                    <RespondentSingle currentPage='respondents' respondent={respondent} key={respondent.id}/>
                 ))}
             </div>
         );

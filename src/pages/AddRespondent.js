@@ -39,14 +39,16 @@ export default function AddRespondent ({currentPage}) {
         }, [newRespondent])
 
         return (
+            <>
             <div className="mainBody">
                 {addedRespondent===null ?
                 <RespondentAdder submitHandler={submitHandler} inputsHandler={inputsHandler} values={values} /> 
                 :<React.Fragment>
                     <h1>Confirm you want to add this Respondent or delete</h1>
-                    <RespondentSingle respondent={addedRespondent} currentPage={currentPage} 
+                    <RespondentSingle respondent={addedRespondent} currentPage='add' 
                     confirmHandler={confirmHandler} setNewRespondent={setNewRespondent} setAddedRespondent={setAddedRespondent}/>
                 </React.Fragment>}
             </div>
+            </>
         );
 }

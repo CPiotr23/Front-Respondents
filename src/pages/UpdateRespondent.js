@@ -4,7 +4,7 @@ import FindRespondent from './fetches/FindRespondent'
 import RespondentSingle from '../objects/RespondentSingle'
 import RespondentEditer from '../objects/RespondentEditer'
 
-export default function UpdateRespondent({currentPage}) {
+export default function UpdateRespondent() {
 
     const [id, setId] = useState(null);
     const [respondent, setRespondent] = useState(null);
@@ -33,7 +33,7 @@ export default function UpdateRespondent({currentPage}) {
                 {id!==null && id!=='' && respondent===null ? 'Respondent with given id werent found!' : null}
                 {respondent!==null ? 
                 (editable===false ? 
-                <RespondentSingle currentPage={currentPage} respondent={respondent} editable={editable} setEditable={setEditable}/> 
+                <RespondentSingle currentPage='update' respondent={respondent} editable={editable} setEditable={setEditable}/> 
                 :<RespondentEditer respondent={respondent} editable={editable} setEditable={setEditable} setRespondent={setRespondent}/>) 
                 :null}
             </div>
