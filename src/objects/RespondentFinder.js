@@ -9,7 +9,8 @@ export default function RespondentFinder({submitIdValueHandler}) {
 
     return (
         <div className="finder"> 
-            Id input: <input type="number" onChange={(e) => changeHandler(e.target.value)}></input><br/>
+            Enter id of respondent to edit:<br/>
+            <b>Id input:</b><input type="number" onChange={(e) => changeHandler(e.target.value)}></input><br/>
             <button onClick={() => submitIdValueHandler(value)}>Confirm</button>
         </div>
     )

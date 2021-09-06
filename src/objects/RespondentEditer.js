@@ -19,17 +19,22 @@ export default function RespondentEditer({respondent, setEditable, editable, set
 
     return (
         <div className="respondent"> 
-                <div className="respondentkeys">
-                    {Object.keys(inputs).map(key => <React.Fragment key={key}><b key={key}>{key.charAt(0).toUpperCase()+key.substring(1)}</b>:<br/></React.Fragment>)}
-                </div>
-                <div className="respondentvalues">
-                    {Object.entries(inputs).map(obj => 
-                    <React.Fragment key={obj[0]}>{obj[0] !=='id' ? <input name={obj[0]} type={typeof obj[1]} value={obj[1]} onChange={(e) => inputsChangeHandler(e)}/> : obj[1]}<br/></React.Fragment>)}
-                </div>
-                <div className="respondentpanel">
-                    <button className="btn_edit" onClick={() => setEditable(!editable)}/><br/>
-                    <button className="btn_confirm" onClick={() => onClickHandler()}/>
-                </div>
+        <div className="respondentpanel">
+                <button className="btn_edit" onClick={() => setEditable(!editable)}/><br/>
+                <button className="btn_confirm" onClick={() => onClickHandler()}/>
+            </div>
+                {Object.entries(inputs).map((object => 
+                    <div className="editer" key={object[0]}> 
+                        {object[0]!=='id' ? <>
+                            <div className="respondentkeys"><b>{object[0].charAt(0).toUpperCase()+object[0].substring(1)}:</b></div>
+                            <div className="respondentvalues"><input name={object[0]} type={typeof object[1]} value={object[1]} onChange={(e) => inputsChangeHandler(e)}/></div>
+                            </> : 
+                             <>
+                             <div className="respondentkeys"><b>{object[0].charAt(0).toUpperCase()+object[0].substring(1)}:</b> {object[1]}</div>
+                              <br/></>
+                        }
+                    </div>
+                ))} 
         </div>
     );
 }
