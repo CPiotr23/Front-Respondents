@@ -4,6 +4,7 @@ import DeleteRespondent from '../pages/fetches/DeleteRespondent';
 export default function RespondentSingle ({currentPage, respondent, setEditable, editable, confirmHandler, setNewRespondent, setAddedRespondent}) {   
     function deleteHandler() {
         DeleteRespondent(respondent.id);
+        setAddedRespondent(null);
     }
 
 

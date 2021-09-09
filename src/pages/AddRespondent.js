@@ -4,7 +4,7 @@ import RespondentAdder from '../objects/RespondentAdder';
 import AddingRespondent from './fetches/AddingRespondent';
 import RespondentSingle from '../objects/RespondentSingle';
 
-export default function AddRespondent ({currentPage}) {
+export default function AddRespondent () {
 
         const [values, setValues] = useState({
             gender: 'none', 
@@ -16,6 +16,7 @@ export default function AddRespondent ({currentPage}) {
             segment: 'none',
         })
 
+        const [currentPage, setCurrentPage] = useState(null);
         const [newRespondent, setNewRespondent] = useState(null);
         const [addedRespondent, setAddedRespondent] = useState(null);
 
@@ -25,6 +26,7 @@ export default function AddRespondent ({currentPage}) {
 
         function submitHandler({values}) {
             setNewRespondent(values);
+            setCurrentPage('add');
         }
 
         function confirmHandler() {
@@ -45,7 +47,7 @@ export default function AddRespondent ({currentPage}) {
                 <RespondentAdder submitHandler={submitHandler} inputsHandler={inputsHandler} values={values} /> 
                 :<React.Fragment>
                     <h1>Confirm you want to add this Respondent or delete</h1>
-                    <RespondentSingle respondent={addedRespondent} currentPage='add' 
+                    <RespondentSingle respondent={addedRespondent} currentPage={currentPage}
                     confirmHandler={confirmHandler} setNewRespondent={setNewRespondent} setAddedRespondent={setAddedRespondent}/>
                 </React.Fragment>}
             </div>
